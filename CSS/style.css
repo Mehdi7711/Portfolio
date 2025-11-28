@@ -1,0 +1,86 @@
+body {
+    background-color: #0c0c14;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #f0f0f0;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    background-color: #1c1c28;
+    border: 2px solid #c5c5c5;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+header h1 {
+    color: #9fc5ff;
+    margin-bottom: 15px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-color: #606068;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.portrait {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.portrait img {
+    width: 160px;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid #87b6fc;
+    box-shadow: 0 0 15px #87b6fc;
+}
+
+.portrait figcaption {
+    font-style: italic;
+    margin-top: 8px;
+    color: #87b6fc;
+}
+
+main {
+    padding: 20px;
+}
+
+main h2 {
+    color: #87b6fc;
+    text-align: center;
+}
+
+/*
+.apropos {}
+
+grid template areas a utiliser pour 
+
+
+.equipements {}
+*/
+
+.animée {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animée:hover {
+    transform: scale(1.1);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #1c1c28;
+    border-top: 2px solid #333;
+    border-radius: 10px 10px 0 0;
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 14px;
+}
