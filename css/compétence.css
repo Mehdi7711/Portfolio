@@ -1,3 +1,6 @@
+/* ===============================
+   GLOBAL
+================================ */
 body {
     background-color: #0c0c14;
     font-family: "Segoe UI", Arial, sans-serif;
@@ -57,60 +60,143 @@ main h2 {
     text-align: center;
 }
 
-.pouvoir {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 40px;
-}
-
-.pouvoir .P1 {
-    display: flex;
-    align-items: right;
-    gap: 20px;
-    background-color: #1c1c28;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #c5c5c5;
-}
-
-.pouvoir .P2 {
-    display: flex;
-    align-items: left;
-    gap: 20px;
-    background-color: #1c1c28;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #c5c5c5;
-}
-
-.pouvoir .P3 {
-    display: flex;
-    align-items: right;
-    gap: 20px;
-    background-color: #1c1c28;
-    padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #c5c5c5;
-}
-
-.pouvoir img {
-    align-items: right;
-    width: 160px;
-    height: auto;
+/* ===============================
+   IMAGES DES POUVOIRS/ARTS
+================================ */
+.pouvoir-img {
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     border: 3px solid #87b6fc;
     box-shadow: 0 0 15px #87b6fc;
-}
-
-.animée {
+    margin-bottom: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.animée:hover {
-    transform: scale(1.1);
+/* ===============================
+   POUVOIRS & ARTS
+================================ */
+.pouvoir,
+.art {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    /* pour que les tooltips restent dans le contexte */
 }
 
+.pouvoir {
+    margin-top: 40px;
+    margin-bottom: 100px;
+    /* espace pour que tooltip ne chevauche pas les arts */
+}
+
+.art {
+    margin-top: 60px;
+}
+
+.pouvoir section,
+.art section {
+    background-color: #1c1c28;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #c5c5c5;
+    width: 250px;
+    /* fixe pour 3 par ligne sur grand écran */
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    /* tooltip position absolute par rapport à la section */
+}
+
+.pouvoir section:hover,
+.art section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(135, 182, 252, 0.8);
+}
+
+.pouvoir section:hover img,
+.art section:hover img {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(159, 197, 255, 0.7));
+}
+
+/* ===============================
+   TOOLTIP
+================================ */
+.pouvoir .tooltip,
+.art .tooltip {
+    display: none;
+    position: absolute;
+    top: 105%;
+    /* sous l'image et le titre */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1c1c28;
+    color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    max-width: 220px;
+    /* largeur max mais flexible */
+    text-align: center;
+    word-wrap: break-word;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    /* toujours au-dessus */
+}
+
+.pouvoir section:hover .tooltip,
+.art section:hover .tooltip {
+    display: block;
+}
+
+.art .tooltip {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 1024px) {
+
+    .pouvoir section,
+    .art section {
+        width: 45%;
+        /* 2 par ligne sur écrans moyens */
+    }
+}
+
+@media (max-width: 768px) {
+
+    .pouvoir,
+    .art {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pouvoir section,
+    .art section {
+        width: 80%;
+        /* 1 par ligne sur mobile */
+    }
+
+    .pouvoir .tooltip,
+    .art .tooltip {
+        width: 90%;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* ===============================
+   FOOTER
+================================ */
 footer {
     text-align: center;
     padding: 10px;

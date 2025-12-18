@@ -1,4 +1,7 @@
-/* ======= Carte et points ======= */
+/* ===============================
+   CARTE INTERACTIVE
+================================ */
+
 .map-section {
     text-align: center;
     margin: 40px auto;
@@ -16,21 +19,31 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
+/* ===== Marqueur avec masque ===== */
+
 .point {
     position: absolute;
-    width: 14px;
-    height: 14px;
-    background-color: #87b6fc;
-    border-radius: 50%;
+    transform: translate(-50%, -50%);
     cursor: pointer;
-    box-shadow: 0 0 10px #87b6fc;
-    transition: transform 0.3s ease;
+    z-index: 10;
 }
 
-.point:hover {
-    transform: scale(1.4);
+/* Image du masque */
+.point img {
+    width: 20px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(135, 182, 252, 0.8));
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
+/* Animation au survol */
+.point:hover img {
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 16px rgba(159, 197, 255, 1));
+}
+
+
+/* Bulle de la carte */
 .tooltip {
     position: absolute;
     top: 50%;
@@ -46,31 +59,172 @@
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+/* Bulle carte à droite */
+.point:hover .tooltip {
+    opacity: 1;
+    left: 110%;
+}
+
+/* Bulle carte à gauche */
+.point.left:hover .tooltip {
+    left: auto;
+    right: 110%;
+}
+
+/* ===============================
+   ZONES IMPORTANTES (TABLEAU)
+================================ */
+
+.zones-section {
+    margin: 60px auto;
+    text-align: center;
+}
+
+.zones-section h2 {
+    color: #87b6fc;
+    margin-bottom: 30px;
+}
+
+/* Tableau en Grid */
+.zones-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Carte de zone */
+.zone {
+    position: relative;
+    background-color: #1c1c28;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+/* Toutes les zones ont un z-index normal */
+.zone {
+    position: relative;
+    z-index: 1;
+}
+
+/* La zone survolée passe AU-DESSUS de toutes les autres */
+.zone:hover {
+    z-index: 100;
+}
+
+
+/* Nom de zone */
+.zone h3 {
+    margin: 0;
+    color: #9fc5ff;
+}
+
+/* Image de zone */
+.zone img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 10;
 }
 
-/* Bulle à droite (par défaut) */
-.point:hover .tooltip {
-    opacity: 1;
-    left: 110%;
-    /* juste à côté du point */
-    right: auto;
+/* Bulle explicative de zone */
+.zone-info {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1c1c28;
+    color: #f0f0f0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    max-width: 260px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
 }
 
-/* Bulle à gauche si classe 'left' */
-.point.left:hover .tooltip {
-    opacity: 1;
-    left: auto;
-    right: 110%;
-    /* juste à côté du point */
+/* Zones colonne gauche → image & texte à droite */
+.zone:nth-child(odd) img {
+    left: 105%;
 }
 
-/* ======= Responsive ======= */
+.zone:nth-child(odd) .zone-info {
+    left: calc(105% + 240px);
+}
+
+/* Zones colonne droite → image & texte à gauche */
+.zone:nth-child(even) img {
+    right: 105%;
+}
+
+.zone:nth-child(even) .zone-info {
+    right: calc(105% + 240px);
+}
+
+/* Apparition image + bulle zone */
+.zone:hover img,
+.zone:hover .zone-info {
+    opacity: 1;
+}
+
+.zone:hover img {
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
 @media (max-width: 768px) {
+
+    /* Carte */
     .tooltip {
         font-size: 11px;
         max-width: 200px;
         padding: 8px 10px;
     }
+
+    /* Tableau zones */
+    .zones-table {
+        grid-template-columns: 1fr;
+    }
+
+    .zone img,
+    .zone-info {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        margin-top: 10px;
+        opacity: 1;
+    }
+}
+
+/* ===== Correction débordement (OBLIGATOIRE) ===== */
+
+.zones-table {
+    overflow: visible;
+}
+
+.zone {
+    overflow: visible;
 }
