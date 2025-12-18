@@ -1,0 +1,76 @@
+/* ======= Carte et points ======= */
+.map-section {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.map-container {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+}
+
+.map-container img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.point {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #87b6fc;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px #87b6fc;
+    transition: transform 0.3s ease;
+}
+
+.point:hover {
+    transform: scale(1.4);
+}
+
+.tooltip {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1c1c28;
+    color: #f0f0f0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: normal;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+/* Bulle à droite (par défaut) */
+.point:hover .tooltip {
+    opacity: 1;
+    left: 110%;
+    /* juste à côté du point */
+    right: auto;
+}
+
+/* Bulle à gauche si classe 'left' */
+.point.left:hover .tooltip {
+    opacity: 1;
+    left: auto;
+    right: 110%;
+    /* juste à côté du point */
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
+    .tooltip {
+        font-size: 11px;
+        max-width: 200px;
+        padding: 8px 10px;
+    }
+}
