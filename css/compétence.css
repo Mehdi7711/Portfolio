@@ -127,8 +127,7 @@ main h2 {
 /* ===============================
    TOOLTIP
 ================================ */
-.pouvoir .tooltip,
-.art .tooltip {
+.pouvoir .tooltip {
     display: none;
     position: absolute;
     top: 105%;
@@ -147,6 +146,25 @@ main h2 {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
     z-index: 100;
     /* toujours au-dessus */
+}
+
+.art .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 105%;
+    /* ⬅️ AU-DESSUS */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1c1c28;
+    color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    max-width: 220px;
+    text-align: center;
+    word-wrap: break-word;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    z-index: 100;
 }
 
 .pouvoir section:hover .tooltip,
